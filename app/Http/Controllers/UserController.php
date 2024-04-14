@@ -15,7 +15,7 @@ class UserController extends Controller
         $listUser=$this->user->getAllUsers();
         return view('admin.user.index',compact('listUser'));
     }
-    public function getById($id){
+    public function detail($id){
         $user=$this->user->getDetail($id);
         return view('admin.user.detail',compact('user'));
     }
@@ -62,29 +62,20 @@ class UserController extends Controller
         if(empty($id))
             return back()->with('msg','Không tim thấy user này');
         $request->validate([
-            'username'=>'required|min:5',
-            'password'=>'required|min:8',
             'name'=>'required|min:5',
             'email'=>'required|email'
         ],[
-            'username.required'=>'Vui lòng nhập username',
-            'username.min'=>'Vui lòng nhập username từ 5 kí tự trở lên',
-            'password.required'=>'Vui lòng nhập password',
-            'password.min'=>'Vui lòng nhập ít nhất 8 kí tự',
             'name.required'=>'Vui lòng nhập tên người dùng',
             'name.min'=>'Nhập tên từ 5 kí tự',
             'email.required'=>'Vui lòng nhập email',
             'email.email'=>'Vui lòng nhập đúng định dạng email'
         ]);
         $data=[
-            $request->username,
-            $request->password,
             $request->name,
             $request->email,
-            $request->address,
-            $request->admin
+            $request->address
         ];
-        $this->user->updateUser($id,$data);
+        $this->user->updateUser($data,$id);
         return redirect()->route('admin.user.index');
     }
     public function delete(Request $request, $id){

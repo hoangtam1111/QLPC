@@ -23,7 +23,7 @@ class User extends Model
     }
     public function updateUser($data,$id){
         $data[]=$id;
-        DB::update('UPDATE '.$this->table.' SET `username`=?,`password`=?,`name`=?,`email`=?,`address`=?,`admin`=? WHERE `user_id`=?',$data);
+        DB::update('UPDATE '.$this->table.' SET `name`=?,`email`=?,`address`=? WHERE `user_id`=?',$data);
     }
     public function deleteUser($id){
         DB::delete('DELETE FROM '.$this->table.' WHERE user_id=?',[$id]);

@@ -14,7 +14,7 @@
             </li>
         </ul>
     </div>
-    <a href="./user_insert.php" style="color: #E02207;">Thêm tài khoản mới</a>
+    <a href="{{ route('admin.user.insert') }}" style="color: #E02207;">Thêm tài khoản mới</a>
     <table class="table table-bordered">
         <tr>
             <th>Tài khoản</th>
