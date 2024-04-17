@@ -7,12 +7,8 @@ use Illuminate\Http\Request;
 
 class BrandController extends Controller
 {
-    private $brand;
-    public function __construct(){
-        $this->brand=new Brand();
-    }
     public function index(){
-        $listBrand=$this->brand->getAllBrands();
+        $listBrand=Brand::get();
         return view('admin.brand.index',compact('listBrand'));
     }
     public function insert(){
@@ -31,11 +27,14 @@ class BrandController extends Controller
             $request->brand_name,
             $request->brand_logo
         ];
-        $this->brand->insertBrand($data);
+        Brand::insert([
+            'brand_name' => $request->brand_name,
+            'brand_logo' => $request->brand_logo
+        ]);
         return redirect()->route('admin.brand.index');
     }
     public function getUpdate(Request $request, $id=0){
-        $brand=$this->brand->getDetail($id);
+        $brand=Brand::where('brand_id',$id)->first();
         if(!empty($brand)){
             $request->session()->put('id',$id);
             return view('admin.brand.update',compact('brand'));
@@ -44,7 +43,6 @@ class BrandController extends Controller
     }
     public function postUpdate(Request $request){
         $id=session('id');
-        echo $id;
         if(empty($id))
             return back()->with('msg','Không tìm thấy id');
         $request->validate([
@@ -55,17 +53,16 @@ class BrandController extends Controller
             'brand_name.min'=>'Tên phải từ 3 kí tự trở lên',
             'brand_logo.required'=>'Vui lòng nhập url logo của brand'
         ]);
-        $data=[
-            $request->brand_name,
-            $request->brand_logo
-        ];
         $request->session()->remove('id');
-        $this->brand->updateBrand($data,$id);
+        Brand::where('brand_id', $id)->update([
+            'brand_name' => $request->brand_name,
+            'brand_logo' => $request->brand_logo
+        ]);
         return redirect()->route('admin.brand.index');
     }
     public function delete(Request $request, $id){
         if(!empty($id)){
-            $brand=$this->brand->getDetail($id);
+            $brand=Brand::where('brand_id',$id)->first();
             if(!empty($brand)){
                 $request->session()->put('id',$id);
                 return view('admin.brand.delete',compact('brand'));
@@ -77,7 +74,7 @@ class BrandController extends Controller
         $id=session('id');
         if(empty($id))
             return back()->with('msg','Không tìm thấy id');
-        $this->brand->deleteBrand($id);
+        Brand::where('brand_id',$id)->delete();
         return redirect()->route('admin.brand.index')->with('msg','Xoá thành công');
     }
 }

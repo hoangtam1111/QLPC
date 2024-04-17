@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 07, 2024 lúc 09:39 AM
+-- Thời gian đã tạo: Th4 16, 2024 lúc 12:42 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.1.25
 
@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 -- Cấu trúc bảng cho bảng `brand`
 --
 
-CREATE TABLE `brand` (
+CREATE TABLE `brands` (
   `brand_id` int(11) NOT NULL,
   `brand_name` varchar(50) NOT NULL,
   `brand_logo` varchar(100) NOT NULL
@@ -37,7 +37,7 @@ CREATE TABLE `brand` (
 -- Đang đổ dữ liệu cho bảng `brand`
 --
 
-INSERT INTO `brand` (`brand_id`, `brand_name`, `brand_logo`) VALUES
+INSERT INTO `brands` (`brand_id`, `brand_name`, `brand_logo`) VALUES
 (1, 'ASUS', 'https://theme.hstatic.net/200000420363/1001121558/14/image_shop_brand_2.png?v=602'),
 (2, 'GIGABYTE', 'https://theme.hstatic.net/200000420363/1001121558/14/image_shop_brand_10.png?v=602'),
 (3, 'MSI', 'https://theme.hstatic.net/200000420363/1001121558/14/image_shop_brand_7.png?v=602'),
@@ -64,7 +64,7 @@ INSERT INTO `brand` (`brand_id`, `brand_name`, `brand_logo`) VALUES
 -- Cấu trúc bảng cho bảng `cart`
 --
 
-CREATE TABLE `cart` (
+CREATE TABLE `carts` (
   `cart_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -89,7 +89,7 @@ CREATE TABLE `forgot_password` (
 -- Cấu trúc bảng cho bảng `order`
 --
 
-CREATE TABLE `order` (
+CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL,
   `create_at` date DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
@@ -102,7 +102,7 @@ CREATE TABLE `order` (
 -- Cấu trúc bảng cho bảng `order_detail`
 --
 
-CREATE TABLE `order_detail` (
+CREATE TABLE `orders_detail` (
   `order_detail_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
@@ -115,7 +115,7 @@ CREATE TABLE `order_detail` (
 -- Cấu trúc bảng cho bảng `product`
 --
 
-CREATE TABLE `product` (
+CREATE TABLE `products` (
   `product_id` int(11) NOT NULL,
   `name` varchar(256) NOT NULL,
   `price` decimal(18,0) NOT NULL,
@@ -130,7 +130,7 @@ CREATE TABLE `product` (
 -- Đang đổ dữ liệu cho bảng `product`
 --
 
-INSERT INTO `product` (`product_id`, `name`, `price`, `description`, `photo`, `quantity`, `type_id`, `brand_id`) VALUES
+INSERT INTO `products` (`product_id`, `name`, `price`, `description`, `photo`, `quantity`, `type_id`, `brand_id`) VALUES
 (61, 'CPU Intel Core I3 12100F | LGA1700, Turbo 4.30 GHz, 4C/8T, 12MB, Box Chính Hãng', 2290000, 'Bộ Sưu Tập Sản Phẩm: 12th Generation Intel® Core™ i3 Processors Tên mã: Alder Lake trước đây của các sản phẩm Số hiệu Bộ xử lý: i3-12100F', 'i3-12100f.webp', 30, 1, 15),
 (62, 'CPU AMD RYZEN 3 3300X (3.8GHz Up to 4.3GHz, AM4, 4 Cores 8 Threads) Box Chính Hãng', 2590000, 'Hiện tại từ phía nhà AMD vừa có động thái ra mắt bổ sung thêm CPU desktop trong phân khúc giá tầm thấp là  Ryzen 3 3300X thuộc phân khúc Ryzen 3000 series, dự kiến ra mắt vào đầu tháng 5/2020.Những vi xử lý này sẽ được thừa hưởng những lợi thế cực kỳ to lớn trong thời điểm hiện tại của nhà AMD là kiến trúc Zen 2 trên tiến trình 7nm mạnh mẽ từ việc cải tiến IPC cũng như bộ nhớ đệm L3 cache.', 'a3-3300x.jpg', 50, 1, 15),
 (63, 'CPU AMD Ryzen 5 5600 | AM4, Upto 4.40 GHz, 6C/12T, 32MB, Box Chính Hãng', 3575000, 'AMD Ryzen 5 5600 sở hữu cấu trúc Zen 3 mạnh mẽ, có nhiều cải tiến mới giúp hiệu năng hoạt động mạnh hơn thế hệ tiền nhiệm. Cấu trúc Zen 3 của AMD đã thay đổi với nhiều cấu trúc đa dạng. Cấu trúc nhân và bộ nhớ được gom về một khối tài nguyên thống nhất, giúp giảm độ trễ khi giữa các thành phần này. Cải tiến khả năng xử lý đơn nhân thể hiện ở chỉ số IPC tăng tổng thể lên tới 19% giúp cải thiện tốc độ chung.Tăng tốc độ xử lý trên CPU nhưng lại không đòi hỏi nhiều năng lượng hơn đồng nghĩa giảm mức độ tỏa nhiệt', 'A5-4600g.jpg', 50, 1, 16),
@@ -168,7 +168,7 @@ INSERT INTO `product` (`product_id`, `name`, `price`, `description`, `photo`, `q
 -- Cấu trúc bảng cho bảng `product_type`
 --
 
-CREATE TABLE `product_type` (
+CREATE TABLE `products_type` (
   `type_id` int(11) NOT NULL,
   `type_name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -177,7 +177,7 @@ CREATE TABLE `product_type` (
 -- Đang đổ dữ liệu cho bảng `product_type`
 --
 
-INSERT INTO `product_type` (`type_id`, `type_name`) VALUES
+INSERT INTO `products_type` (`type_id`, `type_name`) VALUES
 (1, 'CPU - Bộ xử lý'),
 (2, 'Mainboard - Bo mạch chủ'),
 (3, 'Case - Thùng máy'),
@@ -196,8 +196,8 @@ INSERT INTO `product_type` (`type_id`, `type_name`) VALUES
 -- Cấu trúc bảng cho bảng `user`
 --
 
-CREATE TABLE `user` (
-  `user_id` int(11) NOT NULL,
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
   `username` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,
   `name` varchar(40) NOT NULL,
@@ -210,7 +210,7 @@ CREATE TABLE `user` (
 -- Đang đổ dữ liệu cho bảng `user`
 --
 
-INSERT INTO `user` (`user_id`, `username`, `password`, `name`, `email`, `address`, `admin`) VALUES
+INSERT INTO `users` (`id`, `username`, `password`, `name`, `email`, `address`, `admin`) VALUES
 (1, 'user1', 'pass1', 'Tâm', 'nvht@gmail.com', 'Tp.HCM', 1),
 (2, 'user2', 'passnew', 'Minh Đức', 'nguyenvanhoangtam2556@gmail.com', '140 LTT', 0),
 (3, 'user3', 'pass3', 'Thanh Hai', 'th@gmail.com', '140 LTT', 0);
@@ -222,13 +222,13 @@ INSERT INTO `user` (`user_id`, `username`, `password`, `name`, `email`, `address
 --
 -- Chỉ mục cho bảng `brand`
 --
-ALTER TABLE `brand`
+ALTER TABLE `brands`
   ADD PRIMARY KEY (`brand_id`);
 
 --
 -- Chỉ mục cho bảng `cart`
 --
-ALTER TABLE `cart`
+ALTER TABLE `carts`
   ADD PRIMARY KEY (`cart_id`),
   ADD KEY `cart_ibfk_1` (`user_id`),
   ADD KEY `cart_ibfk_2` (`product_id`);
@@ -236,13 +236,13 @@ ALTER TABLE `cart`
 --
 -- Chỉ mục cho bảng `order`
 --
-ALTER TABLE `order`
+ALTER TABLE `orders`
   ADD PRIMARY KEY (`order_id`);
 
 --
 -- Chỉ mục cho bảng `order_detail`
 --
-ALTER TABLE `order_detail`
+ALTER TABLE `orders_detail`
   ADD PRIMARY KEY (`order_detail_id`),
   ADD KEY `ctdh_ibfk_1` (`order_id`),
   ADD KEY `ctdh_ibfk_2` (`product_id`);
@@ -250,7 +250,7 @@ ALTER TABLE `order_detail`
 --
 -- Chỉ mục cho bảng `product`
 --
-ALTER TABLE `product`
+ALTER TABLE `products`
   ADD PRIMARY KEY (`product_id`),
   ADD KEY `sanpham_ibfk_1` (`brand_id`),
   ADD KEY `sanpham_ibfk_2` (`type_id`);
@@ -258,14 +258,14 @@ ALTER TABLE `product`
 --
 -- Chỉ mục cho bảng `product_type`
 --
-ALTER TABLE `product_type`
+ALTER TABLE `products_type`
   ADD PRIMARY KEY (`type_id`);
 
 --
 -- Chỉ mục cho bảng `user`
 --
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`user_id`);
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
@@ -274,44 +274,44 @@ ALTER TABLE `user`
 --
 -- AUTO_INCREMENT cho bảng `brand`
 --
-ALTER TABLE `brand`
-  MODIFY `brand_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+ALTER TABLE `brands`
+  MODIFY `brand_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT cho bảng `cart`
 --
-ALTER TABLE `cart`
+ALTER TABLE `carts`
   MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `order`
 --
-ALTER TABLE `order`
+ALTER TABLE `orders`
   MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `order_detail`
 --
-ALTER TABLE `order_detail`
+ALTER TABLE `orders_detail`
   MODIFY `order_detail_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `product`
 --
-ALTER TABLE `product`
+ALTER TABLE `products`
   MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- AUTO_INCREMENT cho bảng `product_type`
 --
-ALTER TABLE `product_type`
-  MODIFY `type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+ALTER TABLE `products_type`
+  MODIFY `type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT cho bảng `user`
 --
-ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -320,23 +320,23 @@ ALTER TABLE `user`
 --
 -- Các ràng buộc cho bảng `cart`
 --
-ALTER TABLE `cart`
-  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
-  ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`);
+ALTER TABLE `carts`
+  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
 
 --
 -- Các ràng buộc cho bảng `order_detail`
 --
-ALTER TABLE `order_detail`
-  ADD CONSTRAINT `ctdh_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`),
-  ADD CONSTRAINT `ctdh_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`);
+ALTER TABLE `orders_detail`
+  ADD CONSTRAINT `ctdh_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`),
+  ADD CONSTRAINT `ctdh_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
 
 --
 -- Các ràng buộc cho bảng `product`
 --
-ALTER TABLE `product`
-  ADD CONSTRAINT `sanpham_ibfk_1` FOREIGN KEY (`brand_id`) REFERENCES `brand` (`brand_id`),
-  ADD CONSTRAINT `sanpham_ibfk_2` FOREIGN KEY (`type_id`) REFERENCES `product_type` (`type_id`);
+ALTER TABLE `products`
+  ADD CONSTRAINT `sanpham_ibfk_1` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`brand_id`),
+  ADD CONSTRAINT `sanpham_ibfk_2` FOREIGN KEY (`type_id`) REFERENCES `products_type` (`type_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

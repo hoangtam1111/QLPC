@@ -9,28 +9,31 @@
             <div class="col-lg-5 col-md-7 col-6 nav-item">
 
                 <form action="products.php" class="d-flex">
-                    <input class="form-control" type="search" name="search" value="" placeholder="Tìm kiếm" aria-label="Search">
+                    <input class="form-control" type="search" name="search" value="" placeholder="Tìm kiếm"
+                        aria-label="Search">
                     <button class="btn" type="submit"><i class="fas fa-search search"></i></button>
                 </form>
             </div>
             <div class="col-lg-3 col-md-1 col-1 nav-item">
-                <?php if(!empty($_SESSION['Id'])){?>
+                <?php if(Auth::check()){?>
 
-                    <a href="./info.php">
-                        <i class="fas fa-user"></i>
-                        <span class="item-nav"><?php echo $_SESSION['Name']?></span>
-                    </a>
-                    <span> | </span>
-                    <a href="./handlers/process_logout.php">
-                        <span class="item-nav">Đăng xuất</span>
-                    </a>
+                <a href="./info.php">
+                    <i class="fas fa-user"></i>
+                    <span class="item-nav">{{ Auth::user()->name }}</span>
+                </a>
+                <span> | </span>
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit">Đăng xuất</button>
+                </form>
+
 
                 <?php } else{?>
 
-                    <a href="./login.php">
-                        <i class="fas fa-user"></i>
-                        <span class="item-nav">Đăng nhập/ Đăng ký</span>
-                    </a>
+                <a href="{{ route('login') }}">
+                    <i class="fas fa-user"></i>
+                    <span class="item-nav">Đăng nhập/ Đăng ký</span>
+                </a>
 
                 <?php }?>
             </div>
@@ -42,7 +45,8 @@
                 </a>
             </div>
             <div class="col-1 dropdown icon-bar">
-                <button class="btn " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                    aria-expanded="false">
                     <i class="fas fa-bars"></i>
                 </button>
             </div>
@@ -52,13 +56,13 @@
             <div class="col-3">
                 <div class="nav-sidebar">
                     <i class="fas fa-bars"></i>
-                    <a class="product__link" href="./products.php">DANH  MỤC SẢN PHẨM</a>
+                    <a class="product__link" href="./products.php">DANH MỤC SẢN PHẨM</a>
                     <div class="nav-sidebar__list">
                         <ul>
                             {{-- <?php foreach($loaisps as $loaisp){?>
                                 <li class="li-child">
-                                    <a href="./products.php?search=<?php echo $search?>&loaiSP=<?php echo $loaisp->MaLoai ?>&brand=<?php echo $brandId?>">
-                                        <span><?php echo $loaisp->TenLoai?></span>
+                                    <a href="./products.php?search=<?php echo $search; ?>&loaiSP=<?php echo $loaisp->MaLoai; ?>&brand=<?php echo $brandId; ?>">
+                                        <span><?php echo $loaisp->TenLoai; ?></span>
                                         <i class="fas fa-angle-right"></i>
                                     </a>
                                 </li>

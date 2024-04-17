@@ -7,12 +7,8 @@ use Illuminate\Http\Request;
 
 class TypeController extends Controller
 {
-    private $type;
-    public function __construct(){
-        $this->type=new ProductType;
-    }
     public function index(){
-        $listType=$this->type->getAllType();
+        $listType=ProductType::get();
         return view('admin.type.index',compact('listType'));
     }
     public function insert(){
@@ -24,12 +20,13 @@ class TypeController extends Controller
         ],[
             'type_name.required'=>'Vui lòng nhập loại sản phẩm'
         ]);
-        $data=[$request->type_name];
-        $this->type->insertType($data);
+        ProductType::insert([
+            'type_name'=>$request->type_name
+        ]);
         return redirect()->route('admin.type.index');
     }
     public function update(Request $request,$id){
-        $type=$this->type->getDetail($id);
+        $type=ProductType::where('type_id',$id)->first();
         if(!empty($type)){
             $request->session()->put('id',$id);
             return view('admin.type.update',compact('type'));
@@ -45,25 +42,27 @@ class TypeController extends Controller
         ],[
             'type_name.required'=>'Vui lòng nhập loại sản phẩm'
         ]);
-        $data=[$request->type_name];
-        $this->type->updateType($id,$data);
+        ProductType::where('type_id',$id)->update([
+            'type_name'=>$request->type_name
+        ]);
         return redirect()->route('admin.type.index');
     }
     public function delete(Request $request, $id){
         if(!empty($id)){
-            $type=$this->type->getDetail($id);
+            $type=ProductType::where('type_id',$id)->first();
             if(!empty($type)){
-                $request->session()->put('id',$id);
+                $request->session()->put('type_id',$id);
                 return view('admin.type.delete',compact('type'));
             }
         }
         return redirect()->route('admin.type.index')->with('msg','Không tìm thấy id');
     }
     public function postDelete(){
-        $id=session('id');
+        $id=session('type_id');
         if(empty($id))
             return back()->with('msg','Không tìm thấy id');
-        $this->type->deleteType($id);
+        ProductType::where('type_id',$id)->delete();
+        // dd($id);
         return redirect()->route('admin.type.index')->with('msg','Xoá thành công');
     }
 }

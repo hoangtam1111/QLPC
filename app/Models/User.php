@@ -3,29 +3,32 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
-class User extends Model
+class User extends Authenticatable
 {
-    use HasFactory;
-    protected $table='user';
-    public function getAllUsers(){
-        return DB::table($this->table)->get();
-    }
+    protected $table = 'users';
+    use HasApiTokens, HasFactory, Notifiable;
+        protected $fillable=[
+            'name',
+            'email',
+            'password',
 
-    public function getDetail($id){
-        return DB::table($this->table)->where('user_id', $id)->first();
-    }
+    ];
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 
-    public function insertUser($data){
-        DB::insert('INSERT INTO '.$this->table.' (`username`, `password`, `name`, `email`, `address`, `admin`) VALUES (?,?,?,?,?,?)',$data);
-    }
-    public function updateUser($data,$id){
-        $data[]=$id;
-        DB::update('UPDATE '.$this->table.' SET `name`=?,`email`=?,`address`=? WHERE `user_id`=?',$data);
-    }
-    public function deleteUser($id){
-        DB::delete('DELETE FROM '.$this->table.' WHERE user_id=?',[$id]);
-    }
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
 }

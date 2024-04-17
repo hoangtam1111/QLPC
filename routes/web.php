@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +20,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
+
 Route::prefix('admin')->name('admin.')->group(function(){
 
     Route::prefix('home')->name('home')->group(function(){
@@ -37,14 +51,14 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
     Route::prefix('type')->name('type.')->group(function(){
         Route::get('/',[TypeController::class,'index'])->name('index');
-        Route::get('/insert',[TypeController::class,'insert'])->name('insert');
+        Route::get('/insert',[TypeController::class ,'insert'])->name('insert');
         Route::post('/insert',[TypeController::class,'postInsert'])->name('post-insert');
         Route::get('/update/{id}',[TypeController::class,'update'])->name('update');
         Route::post('/update',[TypeController::class,'postUpdate'])->name('post-update');
         Route::get('/delete/{id}',[TypeController::class,'delete'])->name('delete');
         Route::post('/delete',[TypeController::class,'postDelete'])->name('post-delete');
     });
-  Route::prefix('user')->name('user.')->group(function(){
+    Route::prefix('user')->name('user.')->group(function(){
         Route::get('/',[UserController::class,'index'])->name('index');
         Route::get('/detail/{id}',[UserController::class,'detail'])->name('detail');
         Route::get('/insert',[UserController::class,'insert'])->name('insert');
