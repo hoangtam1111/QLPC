@@ -31,4 +31,8 @@ class UserController extends Controller
             return view('auth.login');
         }
     }
+    public function index(){
+        $user=User::all();
+        return view('profile.index',compact('user'));
+    }
 }

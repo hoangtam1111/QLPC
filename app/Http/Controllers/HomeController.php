@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $products1=Product::where('product_type_id',1)->get();
+        $products2=Product::where('product_type_id',2)->get();
+        $products3=Product::where('product_type_id',3)->get();
+        //dd($products1);
+        return view('index',compact('products1','products2','products3'));
+    }
+    public function detail($id){
+
     }
 }

@@ -15,6 +15,7 @@
                 </form>
             </div>
             <div class="col-lg-3 col-md-1 col-1 nav-item">
+
                 <?php if(Auth::check()){?>
 
                 <a href="./info.php">
@@ -26,8 +27,6 @@
                     @csrf
                     <button type="submit">Đăng xuất</button>
                 </form>
-
-
                 <?php } else{?>
 
                 <a href="{{ route('login') }}">

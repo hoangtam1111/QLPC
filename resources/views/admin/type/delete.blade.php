@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layouts.app')
 @section('content')
     <div class="container">
         <h2>Bạn có muốn xóa loại sản phẩm này</h2>
