@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->integer('total_amount');
-            $table->boolean('active');
+            $table->boolean('active')->default(false);
             $table->timestamps();
         });
     }

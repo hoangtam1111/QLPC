@@ -45,7 +45,7 @@
             </ul>
         </div> --}}
         <div class="row">
-            <h2> sản phẩm</h2>
+            <h2>{{ count($products) }} sản phẩm</h2>
             @if (count($products) > 0)
                 @foreach ($products as $pro => $each)
                     <div class="col-lg-2 col-md-4 col-4">
@@ -55,7 +55,7 @@
                                     alt="">
                                 <div class="card-body">
                                     <a href="{{ route('products.detail', $each->id) }}">{{ $each->name }}</a>
-                                    <div style="color: red;">{{ $each->price }} đ</div>
+                                    <div style="color: red;">{{  $each->price_format($each->price) }}</div>
                                 </div>
                             </div>
                         </div>

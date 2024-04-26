@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TypeController;
@@ -25,6 +28,22 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::prefix('products')->name('products.')->group(function(){
+    Route::get('/',[ProductController::class,'index'])->name('index');
+    Route::get('/detail/{id}',[ProductController::class,'detail'])->name('detail');
+});
+
+Route::prefix('cart')->name('cart.')->group(function (){
+    Route::get('/cart',[CartController::class,'index'])->name('index');
+    Route::post('/insert_cart',[CartController::class,'insert'])->name('insert-cart');
+    Route::post('/update_quantity',[CartController::class,'update'])->name('update-cart');
+    Route::post('/delete_cart',[CartController::class,'delete'])->name('delete-cart');
+});
+Route::prefix('order')->name('order.')->group(function (){
+    Route::get('/index',[OrderController::class,'index'])->name('index');
+    Route::post('/buy',[OrderController::class,'buy'])->name('buy');
+
+});
 // Route::middleware('auth')->group(function () {
 //     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
 //     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -34,10 +53,7 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 Route::prefix('admin')->name('admin.')->group(function(){
-
-    Route::prefix('home')->name('home')->group(function(){
-        Route::get('/',function(){return view('admin.home.index');});
-    });
+    Route::get('/',[AdminController::class,'index'])->name('index');
 
     Route::prefix('brand')->name('brand.')->group(function(){
         Route::get('/',[BrandController::class,'index'])->name('index');
@@ -68,9 +84,15 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/delete/{id}',[UserController::class,'delete'])->name('delete');
         Route::post('/delete',[UserController::class,'postDelete'])->name('post-delete');
     });
+    Route::prefix('products')->name('products.')->group(function(){
+        Route::get('/',[ProductController::class,'index'])->name('index');
+        Route::get('/detail/{id}',[ProductController::class,'detail'])->name('detail');
+        Route::get('/insert',[ProductController::class ,'insert'])->name('insert');
+        Route::post('/insert',[ProductController::class,'postInsert'])->name('post-insert');
+        Route::get('/update/{id}',[ProductController::class,'getUpdate'])->name('update');
+        Route::post('/update',[ProductController::class,'postUpdate'])->name('post-update');
+        Route::get('/delete/{id}',[ProductController::class,'delete'])->name('delete');
+        Route::post('/delete',[ProductController::class,'postDelete'])->name('post-delete');
+    });
 });
 
-Route::prefix('products')->name('products.')->group(function(){
-    Route::get('/',[ProductController::class,'index'])->name('index');
-    Route::get('/detail/{id}',[ProductController::class,'detail'])->name('detail');
-});

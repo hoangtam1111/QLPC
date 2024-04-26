@@ -9,15 +9,15 @@
             </tr>
             <tr>
                 <td>Quản lý loại sản phẩm</td>
-                <td><a href="{{ route('admin.type.index') }}">LoaiSP</a></td>
+                <td><a href="{{ route('admin.type.index') }}">Loại sản phẩm</a></td>
             </tr>
             <tr>
                 <td>Quản lý sản phẩm</td>
-                <td><a href="../product/">SanPham</a></td>
+                <td><a href="{{ route('admin.products.index') }}">Sản phẩm</a></td>
             </tr>
             <tr>
                 <td>Quản lý user</td>
-                <td><a href="{{ route('admin.user.index') }}">Users</a></td>
+                <td><a href="{{ route('admin.user.index') }}">Account</a></td>
             </tr>
         </table>
     </div>

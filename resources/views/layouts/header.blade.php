@@ -38,7 +38,7 @@
             </div>
             <div class="col-lg-2 col-md-1 col-1 nav-item">
 
-                <a href="./cart.php">
+                <a href="{{ route('cart.index') }}">
                     <i class="fas fa-shopping-cart"></i>
                     <span class="item-nav">Giỏ hàng</span>
                 </a>
@@ -55,7 +55,7 @@
             <div class="col-3">
                 <div class="nav-sidebar">
                     <i class="fas fa-bars"></i>
-                    <a class="product__link" href="./products.php">DANH MỤC SẢN PHẨM</a>
+                    <a class="product__link" href="{{ route('products.index') }}">DANH MỤC SẢN PHẨM</a>
                     <div class="nav-sidebar__list">
                         <ul>
                             {{-- <?php foreach($loaisps as $loaisp){?>

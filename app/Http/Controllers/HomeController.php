@@ -30,7 +30,4 @@ class HomeController extends Controller
         //dd($products1);
         return view('index',compact('products1','products2','products3'));
     }
-    public function detail($id){
-
-    }
 }

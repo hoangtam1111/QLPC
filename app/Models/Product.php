@@ -21,4 +21,15 @@ class Product extends Model
         'product_type_id',
         'brand_id'
     ];
+    public function brand(){
+        return $this->belongsTo(Brand::class);
+    }
+    public function product_type(){
+        return $this->belongsTo(ProductType::class);
+    }
+    public function price_format($price)
+    {
+        $formattedPrice = number_format($price, 0, ',', '.') . 'đ';
+        return $formattedPrice;
+    }
 }

@@ -16,4 +16,12 @@ class Cart extends Model
         'user_id',
         'quantity'
     ];
+    public function product(){
+        return $this->belongsTo(Product::class);
+    }
+    public function price_format($price)
+    {
+        $formattedPrice = number_format($price, 0, ',', '.') . 'đ';
+        return $formattedPrice;
+    }
 }

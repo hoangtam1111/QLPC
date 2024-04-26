@@ -12,7 +12,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-12">
                     <h3 class="product__price mt-2 pt-3 pd-bottom-12">
-                        Giá: {{ $product->price }} đ
+                        Giá: {{ $product->price_format( $product->price) }}
                     </h3>
                     <hr />
                     <div class="product__info">
@@ -26,9 +26,9 @@
                             </form>
                         </li>
                         <li>
-                            <form action="./handlers/insert_cart.php" method="post" enctype="multipart/form-data"
-                                class="d-flex">
-                                <input type="hidden" name="MaSP" value="<?php echo $product->id; ?>">
+                            <form action="{{ route('cart.insert-cart') }}" method="post" enctype="multipart/form-data" class="d-flex">
+                                @csrf
+                                <input type="hidden" name="id" value="<?php echo $product->id; ?>">
                                 <button class="btn action-2" type="submit">Thêm vào giỏ hàng</button>
                             </form>
                         </li>
