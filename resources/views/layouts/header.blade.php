@@ -2,7 +2,7 @@
     <div class="container ">
         <div class="row">
             <div class="col-lg-2 col-md-2 col-3 nav-item">
-                <a class="navbar-brand" href="./index.php">
+                <a class="navbar-brand" href="{{ route('home') }}">
                     <img src="{{ asset('storage/layout/logo.jpg') }}" alt="Alternate Text" />
                 </a>
             </div>
@@ -18,7 +18,7 @@
 
                 <?php if(Auth::check()){?>
 
-                <a href="./info.php">
+                <a href="{{ route('profile') }}">
                     <i class="fas fa-user"></i>
                     <span class="item-nav">{{ Auth::user()->name }}</span>
                 </a>
@@ -56,18 +56,7 @@
                 <div class="nav-sidebar">
                     <i class="fas fa-bars"></i>
                     <a class="product__link" href="{{ route('products.index') }}">DANH MỤC SẢN PHẨM</a>
-                    <div class="nav-sidebar__list">
-                        <ul>
-                            {{-- <?php foreach($loaisps as $loaisp){?>
-                                <li class="li-child">
-                                    <a href="./products.php?search=<?php echo $search; ?>&loaiSP=<?php echo $loaisp->MaLoai; ?>&brand=<?php echo $brandId; ?>">
-                                        <span><?php echo $loaisp->TenLoai; ?></span>
-                                        <i class="fas fa-angle-right"></i>
-                                    </a>
-                                </li>
-                            <?php }?> --}}
-                        </ul>
-                    </div>
+                    @include('components.product-types')
                 </div>
             </div>
             <div class="col-9">

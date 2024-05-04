@@ -24,8 +24,8 @@
                     <tr>
                         <td>{{ $item->brand_name }}</td>
                         <td><img src="{{ $item->brand_logo }}" alt="Alternate Text" style="width:50px" /></td>
-                        <td><a href="{{ route('admin.brand.update', ['id' => $item->brand_id]) }}">Sửa</a> | <a
-                                href="{{ route('admin.brand.delete', ['id' => $item->brand_id]) }}">Xóa</a></td>
+                        <td><a href="{{ route('admin.brand.update', ['id' => $item->id]) }}">Sửa</a> | <a
+                                href="{{ route('admin.brand.delete', ['id' => $item->id]) }}">Xóa</a></td>
                     </tr>
                 @endforeach
             @endif

@@ -26,7 +26,7 @@ class TypeController extends Controller
         return redirect()->route('admin.type.index');
     }
     public function update(Request $request,$id){
-        $type=ProductType::where('type_id',$id)->first();
+        $type=ProductType::where('id',$id)->first();
         if(!empty($type)){
             $request->session()->put('id',$id);
             return view('admin.type.update',compact('type'));
@@ -42,27 +42,31 @@ class TypeController extends Controller
         ],[
             'type_name.required'=>'Vui lòng nhập loại sản phẩm'
         ]);
-        ProductType::where('type_id',$id)->update([
+        ProductType::where('id',$id)->update([
             'type_name'=>$request->type_name
         ]);
         return redirect()->route('admin.type.index');
     }
     public function delete(Request $request, $id){
         if(!empty($id)){
-            $type=ProductType::where('type_id',$id)->first();
+            $type=ProductType::where('id',$id)->first();
             if(!empty($type)){
-                $request->session()->put('type_id',$id);
+                $request->session()->put('id',$id);
                 return view('admin.type.delete',compact('type'));
             }
         }
         return redirect()->route('admin.type.index')->with('msg','Không tìm thấy id');
     }
     public function postDelete(){
-        $id=session('type_id');
+        $id=session('id');
         if(empty($id))
             return back()->with('msg','Không tìm thấy id');
-        ProductType::where('type_id',$id)->delete();
+        ProductType::where('id',$id)->delete();
         // dd($id);
         return redirect()->route('admin.type.index')->with('msg','Xoá thành công');
+    }
+    public function type(){
+        $product_types=ProductType::get();
+        return view('components.product-types',compact('product_types'));
     }
 }

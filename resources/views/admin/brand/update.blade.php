@@ -4,7 +4,7 @@
         <h2>Chỉnh sửa sản phẩm</h2>
         <form action="{{ route('admin.brand.post-update') }}" method="post" enctype="multipart/form-data">
             <table class="table table-bordered">
-                <input type="hidden" name="brand_id" value="{{ $brand->brand_id }}" />
+                <input type="hidden" name="brand_id" value="{{ $brand->id }}" />
                 <tr>
                     <td><label class="form-label">Tên thương hiệu</label></td>
                     <td>

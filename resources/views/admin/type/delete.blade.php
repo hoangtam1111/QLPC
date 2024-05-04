@@ -6,7 +6,7 @@
         <form method="post" action="{{ route('admin.type.post-delete') }}" enctype="multipart/form-data">
             @csrf
             <table class="table table-bordered">
-                <input type="hidden" name="type_id" value="{{ $type->type_id }}" />
+                <input type="hidden" name="type_id" value="{{ $type->id }}" />
                 <tr>
                     <td><label class="form-label">Tên Loại</label></td>
                     <td>{{ $type->type_name }}</td>

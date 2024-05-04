@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[HomeController::class,'index']);
+Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/profile',[UserController::class,'index'])->name('profile');
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -42,8 +42,8 @@ Route::prefix('cart')->name('cart.')->group(function (){
 Route::prefix('order')->name('order.')->group(function (){
     Route::get('/index',[OrderController::class,'index'])->name('index');
     Route::post('/buy',[OrderController::class,'buy'])->name('buy');
-
 });
+Route::get('type',[TypeController::class,'type'])->name('type');
 // Route::middleware('auth')->group(function () {
 //     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
 //     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

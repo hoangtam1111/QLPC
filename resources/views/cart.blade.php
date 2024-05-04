@@ -17,15 +17,10 @@
                     <th scope="col">Xoá</th>
                 </tr>
             </thead>
-            <?php $total=0 ?>
             @foreach ($carts as $cart)
 
                 <tbody>
                     <tr>
-                        <?php
-                        $price=$cart->product->price*$cart->quantity;
-                        $total+=$price;
-                        ?>
                         <td><img src="{{ asset('storage/product/'.$cart->product->photo.'') }}" alt="Alternate Text" /></td>
                         <td><a href="{{ route('products.detail',$cart->product->id) }}">{{ $cart->product->name }}</a></td>
                         <td>
@@ -37,7 +32,7 @@
                             </form>
                         </td>
                         <td>{{ $cart->product->price_format($cart->product->price) }}</td>
-                        <td>{{ $cart->price_format($price) }}</td>
+                        <td>{{ $cart->price_format($cart->product->price*$cart->quantity) }}</td>
                         <td>
                             <form action="{{ route('cart.delete-cart') }}" method="post" enctype="multipart/form-data">
                                 @csrf

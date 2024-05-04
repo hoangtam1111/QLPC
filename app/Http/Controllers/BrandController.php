@@ -34,7 +34,7 @@ class BrandController extends Controller
         return redirect()->route('admin.brand.index');
     }
     public function getUpdate(Request $request, $id=0){
-        $brand=Brand::where('brand_id',$id)->first();
+        $brand=Brand::where('id',$id)->first();
         if(!empty($brand)){
             $request->session()->put('id',$id);
             return view('admin.brand.update',compact('brand'));
@@ -54,7 +54,7 @@ class BrandController extends Controller
             'brand_logo.required'=>'Vui lòng nhập url logo của brand'
         ]);
         $request->session()->remove('id');
-        Brand::where('brand_id', $id)->update([
+        Brand::where('id', $id)->update([
             'brand_name' => $request->brand_name,
             'brand_logo' => $request->brand_logo
         ]);
@@ -62,7 +62,7 @@ class BrandController extends Controller
     }
     public function delete(Request $request, $id){
         if(!empty($id)){
-            $brand=Brand::where('brand_id',$id)->first();
+            $brand=Brand::where('id',$id)->first();
             if(!empty($brand)){
                 $request->session()->put('id',$id);
                 return view('admin.brand.delete',compact('brand'));
@@ -74,7 +74,7 @@ class BrandController extends Controller
         $id=session('id');
         if(empty($id))
             return back()->with('msg','Không tìm thấy id');
-        Brand::where('brand_id',$id)->delete();
+        Brand::where('id',$id)->delete();
         return redirect()->route('admin.brand.index')->with('msg','Xoá thành công');
     }
 }

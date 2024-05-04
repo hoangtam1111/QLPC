@@ -22,8 +22,8 @@
                 @foreach ($listType as $type => $item)
                     <tr>
                         <td>{{ $item->type_name }}</td>
-                        <td><a href="{{ route('admin.type.update', ['id' => $item->type_id]) }}">Sửa</a> | <a
-                                href="{{ route('admin.type.delete', ['id' => $item->type_id]) }}">Xóa</a></td>
+                        <td><a href="{{ route('admin.type.update', ['id' => $item->id]) }}">Sửa</a> | <a
+                                href="{{ route('admin.type.delete', ['id' => $item->id]) }}">Xóa</a></td>
                     </tr>
                 @endforeach
             @endif

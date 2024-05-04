@@ -28,4 +28,5 @@
     @else
         <h2 class="text-danger">KHÔNG TÌM THẤY SẢN PHẨM</h2>
     @endif
+    <a href="{{ route('products.index') }}" class="btn">Quay trở lại trang sản phẩm</a>
 @endsection

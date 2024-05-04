@@ -15,7 +15,11 @@ class CartController extends Controller
         if(Auth::user()->role=='user'){
             $id=Auth::user()->id;
             $carts=Cart::where('user_id',$id)->get();
-            return view('cart',compact('carts'));
+            $total=0;
+            foreach($carts as $cart){
+                $total+=$cart->product->price*$cart->quantity;
+            }
+            return view('cart',compact('carts','total'));
         }
     }
     public function insert(Request $request){
